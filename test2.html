@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<body>
+
+<div ng-app="testApp" ng-controller="testCtrl">
+  <div ng-init="getCountChar()">
+      <p>Map of character occurrences</p>
+      <p>{{charObjectMap}}</p>
+  </div>
+
+</div>
+<script>
+/* Function which accepts an array of strings and returns a map of character to count of the character(including spaces and special characters) */
+var app = angular.module('testApp', []);
+
+app.controller('testCtrl', function($scope) {
+var inputArr = ["hello world", "hello world"];
+var tempListArr = [], keys = [], values = [], prev;
+var finalObj = {};
+$scope.charObjectMap = {};
+// counts the character passed in an array
+$scope.getCountChar = function()
+{
+  for(var i=0; i<inputArr.length; )
+    {
+        for(var j=0; j<inputArr[i].length; j++)
+        {
+            var charVal = inputArr[i].charAt(j);   
+            //storing all characters inside in this array  
+            tempListArr.push(charVal);
+            //arranges in ascending order
+            tempListArr.sort();
+}
+
+        i++;
+}
+// computes the occurrences
+for ( var k = 0; k < tempListArr.length; k++ ) {
+                if ( tempListArr[k] !== prev ) {
+                    keys.push(tempListArr[k]);
+                    values.push(1);
+                } else {
+                     values[values.length-1]++;
+                }
+                prev = tempListArr[k];
+                keys.forEach((key, i) => finalObj[key] = values[i]);
+
+
+    }
+   $scope.charObjectMap = finalObj;
+}
+
+
+});
+</script>
+
+</body>
+</html>
