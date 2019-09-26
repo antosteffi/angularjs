@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<body>
+
+<div ng-app="testApp" ng-controller="testCtrl">
+  <input class="btn" type="button" id="btn" name="btn" value="Check Let" title="Click Me!" ng-click="simpleFun()" />
+  <p>Variables declared with let keyword will have Block Scope.</p>
+  <p ng-bind="title1"></p>
+  <p ng-bind="title2"></p>
+  <input class="btn" type="button" id="btn" name="btn" value="Check THIS" title="Click Me!" ng-click="simpleFuncThis()" />
+  <p> "this" keyword refers to the object it belongs to.
+
+It has different values depending on where it is used:
+
+In a method, this refers to the owner object.
+Alone, this refers to the global object.
+In a function, this refers to the global object.
+In a function, in strict mode, this is undefined.
+In an event, this refers to the element that received the event.
+</p>
+ <p ng-bind="finalName"></p>
+</div>
+<script>
+/*  */
+var app = angular.module('testApp', []);
+
+app.controller('testCtrl', function($scope) {
+	
+	// let keyword
+	$scope.simpleFun = function()
+	{
+		let x = 1;
+
+		if (x === 1) {
+  		let x = 2;
+		$scope.title1 = x;
+
+}
+
+$scope.title2 = x;
+}
+
+	// this keyword
+	$scope.simpleFuncThis = function()
+	{
+		// Create an object:
+var person = {
+  firstName: "Welcome",
+  lastName : "Accenture",
+  fullName:  function() {
+    return this.firstName + " " + this.lastName;
+  }
+
+};
+$scope.finalName = person.fullName();
+
+}
+
+	
+
+	
+
+
+});
+</script> 
+
+</body>
+</html>

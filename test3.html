@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<body>
+
+<div ng-app="testApp" ng-controller="testCtrl">
+  <input class="btn" type="button" id="btn" name="btn" value="Check Keys" title="Click Me!" ng-click="getObjKeys()" />
+  <ul>
+  	<li ng-repeat="key in keysArr">{{key}}</li>
+  </ul>
+ 
+</div>
+<script>
+/* Function to return all the keys present in an object at any level */
+var app = angular.module('testApp', []);
+// created a function to get all the keys exist in an object
+app.controller('testCtrl', function($scope) {
+	var obj = {a:5, b:{c:{d:10}}};
+	$scope.keysArr = [];
+	var tempArr = [];
+	$scope.getObjKeys = function()
+	{
+		$scope.keysArr = getKeys(obj, tempArr);
+
+	}
+	function getKeys(obj, tempArr)
+	{
+		Object.keys(obj).forEach(function(key)
+			{
+
+			tempArr.push(key);
+			tempArr = getKeys(obj[key], tempArr)
+
+			});
+
+		return tempArr;
+	}
+	
+
+
+});
+</script> 
+
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<body>
+
+<div ng-app="testApp">
+<h1>Enter a word to reverse the string</h1>
+  <input type="text" id="revText" name="revText" ng-model="revText" placeholder="Enter here" />
+
+Reverse String: {{ revText | reverse }}
+</div>
+<script>
+/*Function to reverse every word of a string */
+var app = angular.module('testApp', []);
+// created a reverse filter to reverse the string
+app.filter("reverse", function()
+{
+	 return function(inputStr) {
+    var strRev = "";
+    var revArr = [];
+	if(inputStr)
+	{
+     var splitStr = inputStr.split("");
+     revArr = splitStr.reverse();   
+	strRev = revArr.join("");	
+	}
+    return strRev;
+  };
+});
+</script> 
+
+</body>
+</html>

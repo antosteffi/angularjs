@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<body>
+
+<div ng-app="testApp" ng-controller="testCtrl">
+
+<ul>
+<li ng-repeat="item in listData | unique">{{item}}</li>
+</ul>
+
+</div>
+<script>
+/* Function to remove duplicate strings from an array of strings*/
+var app = angular.module('testApp', []);
+app.controller('testCtrl', function($scope) {
+$scope.listData = ["welcome","accenture","welcome","accenture","welcome"];
+
+});
+// created a unique filter to remove duplicate data
+app.filter("unique", function()
+{
+	return function(duplicateData)
+	{
+		var tempListArr = [];
+		
+  //iterate each element in an array 
+angular.forEach(duplicateData, function(item)
+{
+ // checking if element already exists in the array or not
+if(tempListArr.indexOf(item) === -1)
+{
+tempListArr.push(item);
+}
+})
+return tempListArr;
+	}
+});
+</script> 
+
+</body>
+</html>
